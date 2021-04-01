@@ -17,6 +17,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const booksCollection = client.db("booksstore").collection("book");
+  const bookCheckOutCollection = client.db("booksstore").collection("bookCheckOut");
   app.post('/addBooks',(req,res)=>{
       console.log(req.body);
       booksCollection.insertOne(req.body)
@@ -36,6 +37,16 @@ client.connect(err => {
 })
 app.delete('/deleteBooks/:id',(req,res)=>{
     booksCollection.deleteOne({_id:ObjectID(req.params.id)})
+})
+app.post('/checkout',(req,res)=>{
+    console.log(req.body);
+     bookCheckOutCollection.insertOne(req.body)
+})
+app.get('/collect',(req,res)=>{
+    bookCheckOutCollection.find({})
+    .toArray((err,documents)=>{
+        res.send(documents)
+    })
 })
    console.log('connected');
 });
