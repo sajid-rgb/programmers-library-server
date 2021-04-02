@@ -10,7 +10,6 @@ app.use(bodyParser.json())
 app.get('/',(req,res)=>{
     res.send('Welcome')
 })
-console.log(process.env.DB_USER);
 const MongoClient = require('mongodb').MongoClient;
 const  ObjectID= require('mongodb').ObjectID;
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.weqbi.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
@@ -39,7 +38,6 @@ app.delete('/deleteBooks/:id',(req,res)=>{
     booksCollection.deleteOne({_id:ObjectID(req.params.id)})
 })
 app.post('/checkout',(req,res)=>{
-    console.log(req.body);
      bookCheckOutCollection.insertOne(req.body)
 })
 app.get('/collect',(req,res)=>{
@@ -48,7 +46,6 @@ app.get('/collect',(req,res)=>{
         res.send(documents)
     })
 })
-   console.log('connected');
 });
 
 app.listen(process.env.PORT || port)
