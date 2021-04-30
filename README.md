@@ -26,7 +26,6 @@ Features:
 
 3.Admin can add any books at any time and modify the books list. 
 
-4.Admin can delete any book at   
-any time.
+4.Admin can delete any book at any time.
 
 5.User or admin must need sign in to access.
